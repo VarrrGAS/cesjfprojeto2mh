@@ -1,0 +1,44 @@
+﻿@using LogisticaProdutos.ViewModel
+@model List<UsuarioViewModel>
+
+@{
+    ViewBag.Title = "Lista";
+}
+
+<button onclick="location.href = '/Account/Register';">Criar Novo</button>
+
+<h2>Lista</h2>
+
+<table>
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Nome</td>
+            <td>CPF</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @item.Id
+                </td>
+                <td>
+                    @item.Nome
+                </td>
+                <td>
+                    @item.CPF
+                </td>
+                <td>
+                    <a href="@Url.Action("Excluir", "Usuario", new { Id = item.Id })">
+                        Excluir
+                    </a>
+                    <a href="@Url.Action("Editar", "Usuario", new { Id = item.Id })">
+                        Editar
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

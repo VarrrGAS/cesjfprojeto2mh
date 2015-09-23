@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="BebidasDB">
+    <EntitySetMapping Name="Bebida">
+      <EntityTypeMapping TypeName="Model.Bebida">
+        <MappingFragment StoreEntitySet="tb_bebida">
+          <ScalarProperty Name="Id" ColumnName="id" />
+          <ScalarProperty Name="IdTipoBebida" ColumnName="id_tipo_bebida" />
+          <ScalarProperty Name="Nome" ColumnName="nome" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoBebida">
+      <EntityTypeMapping TypeName="Model.TipoBebida">
+        <MappingFragment StoreEntitySet="tb_tipo_bebida">
+          <ScalarProperty Name="Id" ColumnName="id" />
+          <ScalarProperty Name="Tipo" ColumnName="tipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TipoTransacao">
+      <EntityTypeMapping TypeName="Model.TipoTransacao">
+        <MappingFragment StoreEntitySet="tb_tipo_transacao">
+          <ScalarProperty Name="Id" ColumnName="id" />
+          <ScalarProperty Name="Tipo" ColumnName="tipo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Transacao">
+      <EntityTypeMapping TypeName="Model.Transacao">
+        <MappingFragment StoreEntitySet="tb_transacao">
+          <ScalarProperty Name="Id" ColumnName="id" />
+          <ScalarProperty Name="IdBebida" ColumnName="id_bebida" />
+          <ScalarProperty Name="IdUsuario" ColumnName="id_usuario" />
+          <ScalarProperty Name="IdTipoTransacao" ColumnName="id_tipo_transacao" />
+          <ScalarProperty Name="Qtd" ColumnName="qtd" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuario">
+      <EntityTypeMapping TypeName="Model.Usuario">
+        <MappingFragment StoreEntitySet="tb_usuario">
+          <ScalarProperty Name="Id" ColumnName="id" />
+          <ScalarProperty Name="User" ColumnName="usuario" />
+          <ScalarProperty Name="Nome" ColumnName="nome" />
+          <ScalarProperty Name="CPF" ColumnName="cpf" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

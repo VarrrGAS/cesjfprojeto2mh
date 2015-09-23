@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Bebida">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdTipoBebida" Type="Int32" Nullable="false" />
+    <Property Name="Nome" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="TipoBebida" Relationship="Self.FK__tb_bebida__id_ti__276EDEB3" FromRole="tb_bebida" ToRole="tb_tipo_bebida" />
+    <NavigationProperty Name="Transacao" Relationship="Self.FK__tb_transa__id_be__2C3393D0" FromRole="tb_bebida" ToRole="tb_transacao" />
+  </EntityType>
+  <EntityType Name="TipoBebida">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Bebida" Relationship="Self.FK__tb_bebida__id_ti__276EDEB3" FromRole="tb_tipo_bebida" ToRole="tb_bebida" />
+  </EntityType>
+  <EntityType Name="TipoTransacao">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Transacao" Relationship="Self.FK__tb_transa__id_ti__2E1BDC42" FromRole="tb_tipo_transacao" ToRole="tb_transacao" />
+  </EntityType>
+  <EntityType Name="Transacao">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdBebida" Type="Int32" Nullable="false" />
+    <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+    <Property Name="IdTipoTransacao" Type="Int32" Nullable="false" />
+    <Property Name="Qtd" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Bebida" Relationship="Self.FK__tb_transa__id_be__2C3393D0" FromRole="tb_transacao" ToRole="tb_bebida" />
+    <NavigationProperty Name="TipoTransacao" Relationship="Self.FK__tb_transa__id_ti__2E1BDC42" FromRole="tb_transacao" ToRole="tb_tipo_transacao" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK__tb_transa__id_us__2D27B809" FromRole="tb_transacao" ToRole="tb_usuario" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Nome" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CPF" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Transacao" Relationship="Self.FK__tb_transa__id_us__2D27B809" FromRole="tb_usuario" ToRole="tb_transacao" />
+  </EntityType>
+  <Association Name="FK__tb_bebida__id_ti__276EDEB3">
+    <End Role="tb_tipo_bebida" Type="Model.TipoBebida" Multiplicity="1" />
+    <End Role="tb_bebida" Type="Model.Bebida" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_tipo_bebida">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_bebida">
+        <PropertyRef Name="IdTipoBebida" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tb_transa__id_be__2C3393D0">
+    <End Role="tb_bebida" Type="Model.Bebida" Multiplicity="1" />
+    <End Role="tb_transacao" Type="Model.Transacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_bebida">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_transacao">
+        <PropertyRef Name="IdBebida" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tb_transa__id_ti__2E1BDC42">
+    <End Role="tb_tipo_transacao" Type="Model.TipoTransacao" Multiplicity="1" />
+    <End Role="tb_transacao" Type="Model.Transacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_tipo_transacao">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_transacao">
+        <PropertyRef Name="IdTipoTransacao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tb_transa__id_us__2D27B809">
+    <End Role="tb_usuario" Type="Model.Usuario" Multiplicity="1" />
+    <End Role="tb_transacao" Type="Model.Transacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_transacao">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="BebidasDB" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Bebida" EntityType="Model.Bebida" />
+    <EntitySet Name="TipoBebida" EntityType="Model.TipoBebida" />
+    <EntitySet Name="TipoTransacao" EntityType="Model.TipoTransacao" />
+    <EntitySet Name="Transacao" EntityType="Model.Transacao" />
+    <EntitySet Name="Usuario" EntityType="Model.Usuario" />
+    <AssociationSet Name="FK__tb_bebida__id_ti__276EDEB3" Association="Self.FK__tb_bebida__id_ti__276EDEB3">
+      <End Role="tb_tipo_bebida" EntitySet="TipoBebida" />
+      <End Role="tb_bebida" EntitySet="Bebida" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tb_transa__id_be__2C3393D0" Association="Self.FK__tb_transa__id_be__2C3393D0">
+      <End Role="tb_bebida" EntitySet="Bebida" />
+      <End Role="tb_transacao" EntitySet="Transacao" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tb_transa__id_ti__2E1BDC42" Association="Self.FK__tb_transa__id_ti__2E1BDC42">
+      <End Role="tb_tipo_transacao" EntitySet="TipoTransacao" />
+      <End Role="tb_transacao" EntitySet="Transacao" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tb_transa__id_us__2D27B809" Association="Self.FK__tb_transa__id_us__2D27B809">
+      <End Role="tb_usuario" EntitySet="Usuario" />
+      <End Role="tb_transacao" EntitySet="Transacao" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

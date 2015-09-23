@@ -1,0 +1,28 @@
+﻿@model LogisticaProdutos.ViewModel.UsuarioViewModel
+
+@{
+    ViewBag.Title = "Editar";
+}
+
+<h2>Editar</h2>
+
+@using (Html.BeginForm("Editar","Usuario")) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary()
+
+    <fieldset>
+        <legend>Registration Form</legend>
+        <ol>
+            <li>
+                @*@Html.LabelFor(m => m.Nome)*@
+                @Html.TextBoxFor(m => m.Nome, new { placeholder = "Name" })
+            </li>
+            <li>
+                @*@Html.LabelFor(m => m.CPF)*@
+                @Html.TextBoxFor(m => m.CPF, new { placeholder = "CPF" })
+            </li>
+        </ol>
+        <input type="submit" value="Salvar" />
+        <input type="button" value="Cancelar" onclick="location.href = '/Usuario/Lista';" />
+    </fieldset>
+}

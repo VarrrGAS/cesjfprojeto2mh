@@ -1,0 +1,199 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tb_bebida">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_tipo_bebida" Type="int" Nullable="false" />
+    <Property Name="nome" Type="nvarchar" MaxLength="30" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tb_tipo_bebida">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tipo" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tb_tipo_transacao">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tipo" Type="nvarchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tb_transacao">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="id_bebida" Type="int" Nullable="false" />
+    <Property Name="id_usuario" Type="int" Nullable="false" />
+    <Property Name="id_tipo_transacao" Type="int" Nullable="false" />
+    <Property Name="qtd" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tb_usuario">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="usuario" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="nome" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="cpf" Type="nvarchar" MaxLength="11" Nullable="false" />
+  </EntityType>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityType Name="webpages_Membership">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="ConfirmationToken" Type="nvarchar" MaxLength="128" />
+    <Property Name="IsConfirmed" Type="bit" />
+    <Property Name="LastPasswordFailureDate" Type="datetime" />
+    <Property Name="PasswordFailuresSinceLastSuccess" Type="int" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="PasswordChangedDate" Type="datetime" />
+    <Property Name="PasswordSalt" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="PasswordVerificationToken" Type="nvarchar" MaxLength="128" />
+    <Property Name="PasswordVerificationTokenExpirationDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="webpages_OAuthMembership">
+    <Key>
+      <PropertyRef Name="Provider" />
+      <PropertyRef Name="ProviderUserId" />
+    </Key>
+    <Property Name="Provider" Type="nvarchar" MaxLength="30" Nullable="false" />
+    <Property Name="ProviderUserId" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="UserId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="webpages_Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RoleName" Type="nvarchar" MaxLength="256" Nullable="false" />
+  </EntityType>
+  <EntityType Name="webpages_UsersInRoles">
+    <Key>
+      <PropertyRef Name="UserId" />
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="UserId" Type="int" Nullable="false" />
+    <Property Name="RoleId" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK__tb_bebida__id_ti__276EDEB3">
+    <End Role="tb_tipo_bebida" Type="Self.tb_tipo_bebida" Multiplicity="1" />
+    <End Role="tb_bebida" Type="Self.tb_bebida" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_tipo_bebida">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tb_bebida">
+        <PropertyRef Name="id_tipo_bebida" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tb_transa__id_be__2C3393D0">
+    <End Role="tb_bebida" Type="Self.tb_bebida" Multiplicity="1" />
+    <End Role="tb_transacao" Type="Self.tb_transacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_bebida">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tb_transacao">
+        <PropertyRef Name="id_bebida" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tb_transa__id_ti__2E1BDC42">
+    <End Role="tb_tipo_transacao" Type="Self.tb_tipo_transacao" Multiplicity="1" />
+    <End Role="tb_transacao" Type="Self.tb_transacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_tipo_transacao">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tb_transacao">
+        <PropertyRef Name="id_tipo_transacao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tb_transa__id_us__2D27B809">
+    <End Role="tb_usuario" Type="Self.tb_usuario" Multiplicity="1" />
+    <End Role="tb_transacao" Type="Self.tb_transacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_usuario">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="tb_transacao">
+        <PropertyRef Name="id_usuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_RoleId">
+    <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="1" />
+    <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="webpages_Roles">
+        <PropertyRef Name="RoleId" />
+      </Principal>
+      <Dependent Role="webpages_UsersInRoles">
+        <PropertyRef Name="RoleId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_UserId">
+    <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="1" />
+    <End Role="webpages_UsersInRoles" Type="Self.webpages_UsersInRoles" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="UserProfile">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="webpages_UsersInRoles">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="tb_bebida" EntityType="Self.tb_bebida" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_tipo_bebida" EntityType="Self.tb_tipo_bebida" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_tipo_transacao" EntityType="Self.tb_tipo_transacao" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_transacao" EntityType="Self.tb_transacao" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tb_usuario" EntityType="Self.tb_usuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserProfile" EntityType="Self.UserProfile" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="webpages_UsersInRoles" EntityType="Self.webpages_UsersInRoles" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__tb_bebida__id_ti__276EDEB3" Association="Self.FK__tb_bebida__id_ti__276EDEB3">
+      <End Role="tb_tipo_bebida" EntitySet="tb_tipo_bebida" />
+      <End Role="tb_bebida" EntitySet="tb_bebida" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tb_transa__id_be__2C3393D0" Association="Self.FK__tb_transa__id_be__2C3393D0">
+      <End Role="tb_bebida" EntitySet="tb_bebida" />
+      <End Role="tb_transacao" EntitySet="tb_transacao" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tb_transa__id_ti__2E1BDC42" Association="Self.FK__tb_transa__id_ti__2E1BDC42">
+      <End Role="tb_tipo_transacao" EntitySet="tb_tipo_transacao" />
+      <End Role="tb_transacao" EntitySet="tb_transacao" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tb_transa__id_us__2D27B809" Association="Self.FK__tb_transa__id_us__2D27B809">
+      <End Role="tb_usuario" EntitySet="tb_usuario" />
+      <End Role="tb_transacao" EntitySet="tb_transacao" />
+    </AssociationSet>
+    <AssociationSet Name="fk_RoleId" Association="Self.fk_RoleId">
+      <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+      <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+    </AssociationSet>
+    <AssociationSet Name="fk_UserId" Association="Self.fk_UserId">
+      <End Role="UserProfile" EntitySet="UserProfile" />
+      <End Role="webpages_UsersInRoles" EntitySet="webpages_UsersInRoles" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

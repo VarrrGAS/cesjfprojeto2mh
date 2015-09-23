@@ -1,0 +1,176 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Bebida">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdTipoBebida" Type="Int32" Nullable="false" />
+    <Property Name="Nome" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="TipoBebida" Relationship="Self.FK__tb_bebida__id_ti__276EDEB3" FromRole="tb_bebida" ToRole="tb_tipo_bebida" />
+    <NavigationProperty Name="Transacao" Relationship="Self.FK__tb_transa__id_be__2C3393D0" FromRole="tb_bebida" ToRole="tb_transacao" />
+  </EntityType>
+  <EntityType Name="TipoBebida">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Bebida" Relationship="Self.FK__tb_bebida__id_ti__276EDEB3" FromRole="tb_tipo_bebida" ToRole="tb_bebida" />
+  </EntityType>
+  <EntityType Name="TipoTransacao">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Tipo" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Transacao" Relationship="Self.FK__tb_transa__id_ti__2E1BDC42" FromRole="tb_tipo_transacao" ToRole="tb_transacao" />
+  </EntityType>
+  <EntityType Name="Transacao">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdBebida" Type="Int32" Nullable="false" />
+    <Property Name="IdUsuario" Type="Int32" Nullable="false" />
+    <Property Name="IdTipoTransacao" Type="Int32" Nullable="false" />
+    <Property Name="Qtd" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Bebida" Relationship="Self.FK__tb_transa__id_be__2C3393D0" FromRole="tb_transacao" ToRole="tb_bebida" />
+    <NavigationProperty Name="TipoTransacao" Relationship="Self.FK__tb_transa__id_ti__2E1BDC42" FromRole="tb_transacao" ToRole="tb_tipo_transacao" />
+    <NavigationProperty Name="Usuario" Relationship="Self.FK__tb_transa__id_us__2D27B809" FromRole="tb_transacao" ToRole="tb_usuario" />
+  </EntityType>
+  <EntityType Name="Usuario">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="User" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Nome" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CPF" Type="String" MaxLength="11" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Transacao" Relationship="Self.FK__tb_transa__id_us__2D27B809" FromRole="tb_usuario" ToRole="tb_transacao" />
+  </EntityType>
+  <EntityType Name="UserProfile">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="webpages_Roles" Relationship="Self.webpages_UsersInRoles" FromRole="UserProfile" ToRole="webpages_Roles" />
+  </EntityType>
+  <EntityType Name="webpages_Membership">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="ConfirmationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="IsConfirmed" Type="Boolean" />
+    <Property Name="LastPasswordFailureDate" Type="DateTime" Precision="3" />
+    <Property Name="PasswordFailuresSinceLastSuccess" Type="Int32" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PasswordChangedDate" Type="DateTime" Precision="3" />
+    <Property Name="PasswordSalt" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PasswordVerificationToken" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="PasswordVerificationTokenExpirationDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="webpages_OAuthMembership">
+    <Key>
+      <PropertyRef Name="Provider" />
+      <PropertyRef Name="ProviderUserId" />
+    </Key>
+    <Property Name="Provider" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderUserId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="webpages_Roles">
+    <Key>
+      <PropertyRef Name="RoleId" />
+    </Key>
+    <Property Name="RoleId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="UserProfile" Relationship="Self.webpages_UsersInRoles" FromRole="webpages_Roles" ToRole="UserProfile" />
+  </EntityType>
+  <Association Name="FK__tb_bebida__id_ti__276EDEB3">
+    <End Role="tb_tipo_bebida" Type="Model.TipoBebida" Multiplicity="1" />
+    <End Role="tb_bebida" Type="Model.Bebida" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_tipo_bebida">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_bebida">
+        <PropertyRef Name="IdTipoBebida" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tb_transa__id_be__2C3393D0">
+    <End Role="tb_bebida" Type="Model.Bebida" Multiplicity="1" />
+    <End Role="tb_transacao" Type="Model.Transacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_bebida">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_transacao">
+        <PropertyRef Name="IdBebida" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tb_transa__id_ti__2E1BDC42">
+    <End Role="tb_tipo_transacao" Type="Model.TipoTransacao" Multiplicity="1" />
+    <End Role="tb_transacao" Type="Model.Transacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_tipo_transacao">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_transacao">
+        <PropertyRef Name="IdTipoTransacao" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__tb_transa__id_us__2D27B809">
+    <End Role="tb_usuario" Type="Model.Usuario" Multiplicity="1" />
+    <End Role="tb_transacao" Type="Model.Transacao" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tb_usuario">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="tb_transacao">
+        <PropertyRef Name="IdUsuario" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="webpages_UsersInRoles">
+    <End Role="webpages_Roles" Type="Self.webpages_Roles" Multiplicity="*" />
+    <End Role="UserProfile" Type="Self.UserProfile" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tb_bebida" EntityType="Model.Bebida" />
+    <EntitySet Name="tb_tipo_bebida" EntityType="Model.TipoBebida" />
+    <EntitySet Name="tb_tipo_transacao" EntityType="Model.TipoTransacao" />
+    <EntitySet Name="tb_transacao" EntityType="Model.Transacao" />
+    <EntitySet Name="tb_usuario" EntityType="Model.Usuario" />
+    <EntitySet Name="UserProfile" EntityType="Self.UserProfile" />
+    <EntitySet Name="webpages_Membership" EntityType="Self.webpages_Membership" />
+    <EntitySet Name="webpages_OAuthMembership" EntityType="Self.webpages_OAuthMembership" />
+    <EntitySet Name="webpages_Roles" EntityType="Self.webpages_Roles" />
+    <AssociationSet Name="FK__tb_bebida__id_ti__276EDEB3" Association="Self.FK__tb_bebida__id_ti__276EDEB3">
+      <End Role="tb_tipo_bebida" EntitySet="tb_tipo_bebida" />
+      <End Role="tb_bebida" EntitySet="tb_bebida" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tb_transa__id_be__2C3393D0" Association="Self.FK__tb_transa__id_be__2C3393D0">
+      <End Role="tb_bebida" EntitySet="tb_bebida" />
+      <End Role="tb_transacao" EntitySet="tb_transacao" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tb_transa__id_ti__2E1BDC42" Association="Self.FK__tb_transa__id_ti__2E1BDC42">
+      <End Role="tb_tipo_transacao" EntitySet="tb_tipo_transacao" />
+      <End Role="tb_transacao" EntitySet="tb_transacao" />
+    </AssociationSet>
+    <AssociationSet Name="FK__tb_transa__id_us__2D27B809" Association="Self.FK__tb_transa__id_us__2D27B809">
+      <End Role="tb_usuario" EntitySet="tb_usuario" />
+      <End Role="tb_transacao" EntitySet="tb_transacao" />
+    </AssociationSet>
+    <AssociationSet Name="webpages_UsersInRoles" Association="Self.webpages_UsersInRoles">
+      <End Role="webpages_Roles" EntitySet="webpages_Roles" />
+      <End Role="UserProfile" EntitySet="UserProfile" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

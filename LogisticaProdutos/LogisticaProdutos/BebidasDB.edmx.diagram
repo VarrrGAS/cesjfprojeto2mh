@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="12e5ccaf2beb448196099b4bb4f3a9a7" Name="Diagram1">
+        <EntityTypeShape EntityType="Model.Bebida" Width="1.5" PointX="3" PointY="1.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TipoBebida" Width="1.5" PointX="0.75" PointY="1.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.TipoTransacao" Width="1.5" PointX="1.625" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Transacao" Width="1.5" PointX="5.25" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Usuario" Width="1.5" PointX="7.5" PointY="3.75" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK__tb_bebida__id_ti__276EDEB3" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__tb_transa__id_be__2C3393D0" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__tb_transa__id_ti__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__tb_transa__id_us__2D27B809" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
