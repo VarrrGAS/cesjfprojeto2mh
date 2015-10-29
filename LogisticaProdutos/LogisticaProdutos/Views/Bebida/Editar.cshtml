@@ -1,0 +1,30 @@
+﻿@model LogisticaProdutos.ViewModel.BebidaViewModel
+
+@{
+    ViewBag.Title = "Editar";
+}
+
+<h2>Editar</h2>
+
+@using (Html.BeginForm("Editar","Bebida")) {
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.Id)
+
+    <fieldset>
+        <legend>Bebidas</legend>
+        <ol>
+            <li>
+                @*@Html.LabelFor(m => m.Nome)*@
+                @Html.TextBoxFor(m => m.Nome, new { placeholder = "Name" })
+                @Html.ValidationMessageFor(m => m.Nome, String.Empty, new { @class = "error" })
+            </li>
+            <li>
+                @*@Html.LabelFor(m => m.CPF)*@
+                @Html.DropDownListFor(m => m.IdTipoBebida, new SelectList(Model.TipoBebidaList, "Id", "Tipo", Model.IdTipoBebida), "Selecione...", new { style = "width: 312px;height: 30px;border: 1px solid #E2E2E2;" })
+                @Html.ValidationMessageFor(m => m.IdTipoBebida, String.Empty, new { @class = "error" })
+            </li>
+        </ol>
+        <input type="submit" value="Salvar" />
+        <input type="button" value="Cancelar" onclick="location.href = '/Bebida/Lista';" />
+    </fieldset>
+}

@@ -203,6 +203,7 @@
     </Compile>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\BebidaController.cs" />
     <Compile Include="Controllers\UsuarioController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
     <Compile Include="Global.asax.cs">
@@ -222,6 +223,7 @@
     <Compile Include="Usuario.cs">
       <DependentUpon>BebidasDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="ViewModel\BebidaViewModel.cs" />
     <Compile Include="ViewModel\UsuarioViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -334,6 +336,9 @@
     <Content Include="Views\Shared\_LayoutLogin.cshtml" />
     <Content Include="Views\Usuario\Lista.cshtml" />
     <Content Include="Views\Usuario\Editar.cshtml" />
+    <Content Include="Views\Bebida\Editar.cshtml" />
+    <Content Include="Views\Bebida\Lista.cshtml" />
+    <Content Include="Views\Bebida\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
