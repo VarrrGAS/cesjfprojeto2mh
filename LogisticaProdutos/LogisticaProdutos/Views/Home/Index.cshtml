@@ -1,6 +1,38 @@
-﻿@{
+﻿@model LogisticaProdutos.ViewModel.EstoqueViewModel
+
+@{
     ViewBag.Title = "Home Page";
 }
 
 
-<h1>Aqui dentro ficará todos os relatórios e transações</h1>
+
+<table id="table-bebidas">
+    <thead>
+        <tr>
+            <th>Bebida</th>
+            <th>Tipo</th>
+            <th>Quantidade</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (LogisticaProdutos.ViewModel.BebidaViewModel item in Model.Bebidas) {
+            <tr>
+                <td>
+                    @item.Nome
+                </td>
+                <td>
+                    @item.TipoBebida.Tipo
+                </td>
+                <td>
+                    @item.Quantidade
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#table-bebidas").dataTable();
+    });
+</script>

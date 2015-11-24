@@ -12,6 +12,8 @@ namespace LogisticaProdutos.ViewModel {
         [Required]
         public string Nome { get; set; }
 
+        public int Quantidade { get; set; }
+
         public List<TipoBebida> TipoBebidaList { get; set; }
 
         public TipoBebida TipoBebida { get; set; }
