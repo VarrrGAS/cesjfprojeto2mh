@@ -224,6 +224,7 @@
       <DependentUpon>BebidasDB.tt</DependentUpon>
     </Compile>
     <Compile Include="ViewModel\BebidaViewModel.cs" />
+    <Compile Include="ViewModel\EstoqueViewModel.cs" />
     <Compile Include="ViewModel\UsuarioViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

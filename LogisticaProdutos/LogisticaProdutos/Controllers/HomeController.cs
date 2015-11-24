@@ -9,10 +9,28 @@ using System.Web.Mvc;
 namespace LogisticaProdutos.Controllers {
     [Authorize]
     public class HomeController : Controller {
-        public ActionResult Index() {
-            ViewBag.Message = "Modify this template to jump-start your ASP.NET MVC application.";
 
-            return View();
+        BebidasDB db = new BebidasDB();
+
+        public ActionResult Index() {
+
+            EstoqueViewModel estoque = new EstoqueViewModel();
+            List<Bebida> bebidas = db.Bebida.ToList();
+
+            foreach (Bebida item in bebidas) {
+                BebidaViewModel bebida = new BebidaViewModel();
+                bebida.Nome = item.Nome;
+                if (db.Transacao.Any())
+                    bebida.Quantidade = db.Transacao.Where(x => x.IdBebida == item.Id).Sum(x => x.Qtd);
+                else
+                    bebida.Quantidade = 0;
+
+                bebida.TipoBebida = item.TipoBebida;
+
+                estoque.Bebidas.Add(bebida);
+            }
+
+            return View(estoque);
         }
     }
 }
