@@ -340,6 +340,7 @@
     <Content Include="Views\Bebida\Editar.cshtml" />
     <Content Include="Views\Bebida\Lista.cshtml" />
     <Content Include="Views\Bebida\Create.cshtml" />
+    <Content Include="Views\Bebida\_transacao.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

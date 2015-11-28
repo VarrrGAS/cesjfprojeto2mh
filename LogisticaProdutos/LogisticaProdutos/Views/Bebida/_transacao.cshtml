@@ -1,0 +1,48 @@
+﻿@model LogisticaProdutos.ViewModel.EstoqueViewModel
+
+<style type="text/css">
+    select {
+        width: 300px;
+        height: 35px;
+        border-radius: 5px;
+        text-indent: 10px;
+        font-size: 16px;
+    }
+
+    .row {
+        box-shadow: 0 0 10px 0 gray;
+        width: 354px;
+        padding: 30px;
+        border-radius: 15px;
+        margin-bottom: 50px;
+    }
+    #errorMessage{
+        font-weight:bold;
+        color:red;
+    }
+</style>
+
+@using (Html.BeginForm("RealizarTransacao", "Bebida", FormMethod.Post)) {
+    <div class="row">
+
+        @Html.LabelFor(x => x.BebidaId)
+        @Html.DropDownListFor(model => model.BebidaId, new SelectList(Model.BebidaList, "Id", "Nome", Model.BebidaId), "Selecione...", new { @class = "form-control" })
+        @Html.ValidationMessageFor(x => x.BebidaId)
+        <br /><br />
+        @Html.RadioButtonFor(x => x.TipoTransacao, "Entrada", new { style = "width: 17px;" }) Entrada
+        @Html.RadioButtonFor(x => x.TipoTransacao, "Saida", new { style = "width: 17px;" }) Saída
+        @Html.ValidationMessageFor(x => x.TipoTransacao)
+        <br /><br />
+        @Html.LabelFor(x => x.Quantidade)
+        @Html.TextBoxFor(x => x.Quantidade, new { style = "width: 80px;" })
+        @Html.ValidationMessageFor(x => x.Quantidade)
+
+        <br />
+        <span id="errorMessage"></span>
+        <br />
+        <div>
+            <button class="btn btn-default cancelar">Cancelar</button>
+            <input type="submit" class="btn btn-default salvar" value="Salvar">
+        </div>
+    </div>
+}

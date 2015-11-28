@@ -17,12 +17,19 @@ namespace LogisticaProdutos.Controllers {
             EstoqueViewModel estoque = new EstoqueViewModel();
             List<Bebida> bebidas = db.Bebida.ToList();
 
+            
+
             foreach (Bebida item in bebidas) {
+                int quantidade = 0;
                 BebidaViewModel bebida = new BebidaViewModel();
                 bebida.Nome = item.Nome;
-                if (db.Transacao.Any())
-                    bebida.Quantidade = db.Transacao.Where(x => x.IdBebida == item.Id).Sum(x => x.Qtd);
-                else
+                if (db.Transacao.Any()) {
+                    foreach (var transacao in db.Transacao.Where(x => x.IdBebida == item.Id).ToList())
+	                {
+                        quantidade += transacao.Qtd;
+	                }
+                    bebida.Quantidade = quantidade;
+                } else
                     bebida.Quantidade = 0;
 
                 bebida.TipoBebida = item.TipoBebida;
@@ -30,7 +37,9 @@ namespace LogisticaProdutos.Controllers {
                 estoque.Bebidas.Add(bebida);
             }
 
-            return View(estoque);
+            estoque.BebidaList = bebidas;
+
+            return View("Index",estoque);
         }
     }
 }

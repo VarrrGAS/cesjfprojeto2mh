@@ -5,6 +5,23 @@
 }
 
 
+<style type="text/css">
+    .topButtons {
+        padding:20px;
+        margin-bottom:20px;
+    }
+</style>
+
+<div class="topButtons">
+
+    <button class="btn btn-default" id="realizarTransacao">Realizar transação</button>
+
+</div>
+
+<div class="transacao" style="display:none;">
+    @Html.Partial("~/Views/Bebida/_transacao.cshtml")
+</div>
+
 
 <table id="table-bebidas">
     <thead>
@@ -23,7 +40,7 @@
                 <td>
                     @item.TipoBebida.Tipo
                 </td>
-                <td>
+                <td id="@item.Nome">
                     @item.Quantidade
                 </td>
             </tr>
@@ -34,5 +51,31 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $("#table-bebidas").dataTable();
+
+        $("#Quantidade").val("");
+
+        $("#realizarTransacao").click(function () {
+            $(".transacao").show('slow');
+        });
+
+        $(".cancelar").click(function () {
+            $(".transacao").hide('slow');
+            return false;
+        });
+
+        $("form").submit(function () {
+            if ($("#BebidaId").val() == "" || $("input[type=radio][name=TipoTransacao]:checked").length == 0 || $("#Quantidade").val() == "") {
+                $("#errorMessage").text("Todos os campos são obrigatórios.");
+                return false;
+            }
+
+            if ($("input[type=radio][name=TipoTransacao]:checked").val() == "Saida" && $("#Quantidade").val() > parseFloat($("#" + $("#BebidaId").find('option:selected').text()).text().trim())) {
+                $("#errorMessage").text("Não há quantidade suficiente desta bebida.");
+                return false;
+            }
+
+
+
+        })
     });
 </script>

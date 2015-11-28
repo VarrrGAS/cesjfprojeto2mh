@@ -93,5 +93,27 @@ namespace LogisticaProdutos.Controllers
             return RedirectToAction("Lista");
         }
 
+        [HttpPost]
+        public ActionResult RealizarTransacao(EstoqueViewModel estoque){
+
+            Transacao transacao = new Transacao();
+
+            transacao.IdBebida = estoque.BebidaId;
+            transacao.Qtd += estoque.TipoTransacao == "Entrada" ? estoque.Quantidade : -estoque.Quantidade;
+
+            string userName = Membership.GetUser().UserName;
+            List<Usuario> users = db.Usuario.ToList();
+            Usuario user = db.Usuario.FirstOrDefault(x => x.User == userName);
+
+            transacao.Usuario = user;
+            transacao.IdUsuario = user.Id;
+            transacao.TipoTransacao = db.TipoTransacao.FirstOrDefault(x => x.Tipo == estoque.TipoTransacao);
+
+            db.Transacao.Add(transacao);
+            db.SaveChanges();
+
+            return RedirectToAction("Index","Home");
+        }
+
     }
 }
