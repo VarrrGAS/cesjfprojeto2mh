@@ -6,6 +6,12 @@ using System.Web;
 
 namespace LogisticaProdutos.ViewModel {
     public class BebidaViewModel {
+
+        public BebidaViewModel() {
+            TipoBebidaList = new List<TipoBebida>();
+            TipoBebida = new TipoBebida();
+        }
+
         public int? Id { get; set; }
         [Required]
         public int? IdTipoBebida { get; set; }

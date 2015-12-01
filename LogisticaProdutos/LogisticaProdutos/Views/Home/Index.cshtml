@@ -22,7 +22,10 @@
     @Html.Partial("~/Views/Bebida/_transacao.cshtml")
 </div>
 
+<hr />
 
+<h2>Relatório de Bebidas</h2>
+<br />
 <table id="table-bebidas">
     <thead>
         <tr>
@@ -48,9 +51,42 @@
     </tbody>
 </table>
 
+<br />
+<hr />
+<br />
+
+<h2>Relatório de Transação</h2>
+<br />
+
+<table id="table-entrada">
+    <thead>
+        <tr>
+            <th>Bebida</th>
+            <th>Tipo da Transação</th>
+            <th>Quantidade</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (LogisticaProdutos.ViewModel.RelatorioViewModel item in Model.Relatorio) {
+            <tr>
+                <td>
+                    @item.Bebida.Nome
+                </td>
+                <td>
+                    @item.TipoTransacao
+                </td>
+                <td>
+                    @item.Qtd
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
 <script type="text/javascript">
     $(document).ready(function () {
         $("#table-bebidas").dataTable();
+        $("#table-entrada").dataTable();
 
         $("#Quantidade").val("");
 

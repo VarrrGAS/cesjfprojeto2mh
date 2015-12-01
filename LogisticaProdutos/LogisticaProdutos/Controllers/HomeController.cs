@@ -16,8 +16,7 @@ namespace LogisticaProdutos.Controllers {
 
             EstoqueViewModel estoque = new EstoqueViewModel();
             List<Bebida> bebidas = db.Bebida.ToList();
-
-            
+            List<RelatorioViewModel> relatorio = new List<RelatorioViewModel>();
 
             foreach (Bebida item in bebidas) {
                 int quantidade = 0;
@@ -39,6 +38,18 @@ namespace LogisticaProdutos.Controllers {
 
             estoque.BebidaList = bebidas;
 
+
+            List<Transacao> transacoes = db.Transacao.ToList();
+
+            foreach (Transacao item in transacoes) {
+                RelatorioViewModel itemRelat = new RelatorioViewModel();
+                itemRelat.Bebida = item.Bebida;
+                itemRelat.Qtd = item.Qtd;
+                itemRelat.TipoTransacao = item.TipoTransacao.Tipo;
+                relatorio.Add(itemRelat);
+            }
+
+            estoque.Relatorio = relatorio;
             return View("Index",estoque);
         }
     }

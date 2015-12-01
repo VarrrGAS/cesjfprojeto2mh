@@ -9,6 +9,7 @@ namespace LogisticaProdutos.ViewModel {
 
         public EstoqueViewModel() {
             Bebidas = new List<BebidaViewModel>();
+            Relatorio = new List<RelatorioViewModel>();
         }
 
         public List<BebidaViewModel> Bebidas { get; set; }
@@ -21,5 +22,6 @@ namespace LogisticaProdutos.ViewModel {
         [Required]
         public string TipoTransacao { get; set; }
 
+        public List<RelatorioViewModel> Relatorio { get; set; }
     }
 }
